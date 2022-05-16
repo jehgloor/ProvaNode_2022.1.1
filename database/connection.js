@@ -7,6 +7,5 @@ const conexao = mysql.createConnection({
     port:3306,
     database:"aulanode"
 })
-// é pra torna visivel essa conexao quando chamar 
-//a variavel conexao
 module.exports = conexao
+

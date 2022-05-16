@@ -1,23 +1,30 @@
+// npm install express   
+// npm --save-dev install nodemon
+// npm install consign
+// npm install body-parser
+// npm install mysql
+// Comando para iniciar a aplicação: npm start
 
 const utilizandoExpress = require('./configuracao/customizarExpress.js') 
 
 const conexao = require('./database/connection')
 const tabelas = require('./database/tabelas')
 
-conexao.connect(erro =>{
 
+
+conexao.connect(erro =>{
     if(erro){
         console.log('Erro na conexão com o banco'+erro)
     }else{
-
         console.log("conectado ao banco com sucesso");
         tabelas.iniciaConexao(conexao)
 
         const app = utilizandoExpress();
         app.listen(3000, () => console.log('Servidor ativo na porta 3000'))
-
     }
 })
+
+
 
 //instalado o express, nodemon , consign , body-parser , mysql
 
