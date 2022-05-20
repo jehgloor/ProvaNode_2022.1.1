@@ -1,7 +1,12 @@
+const res = require('express/lib/response')
+const Carteira = require('../model/carteira')
+
 
 module.exports = app => {
-    app.get('/carteira', (req,res) =>
-        res.send('Você está em CARTEIRA via GET'))
+    app.get('/carteira', (req,res) => {
+        Carteira.lista(res)
+    })
+        
 
 
     app.post('/carteira', (req,res) => {
@@ -9,8 +14,9 @@ module.exports = app => {
             res.send('saldo insuficiente')
             console.log("saldo insuficiente");
         }else{
-            res.send('Você esta em CARTEIRA via POST')
             console.log(req.body)
+            Carteira.adiciona(req.body)
+            res.send('Você esta em CARTEIRA via POST')
         }
         
     })
