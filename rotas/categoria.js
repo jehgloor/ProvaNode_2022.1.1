@@ -1,9 +1,23 @@
 const Categoria = require ('../model/categoria')
 
 module.exports = app =>{
-    app.get('/categoria', (req,res) => {
-        Categoria.lista(res)
+    app.get('/categoria', (req,res) =>{
+        res.send('Você está em LOGIN via GET') 
+        //retorna os dados ?
+        Login.lista(res)
+    } )
+        
+    app.get('/categoria /:id',(req, res) => {
+        let id = parseInt(req.params.id)
+        Despesa.buscaPorId(id, res)
     })
+
+    app.patch('/categoria/:id',(req, res) =>{
+        let id = parseInt(req.params.id)
+        let valores = req.body
+        Despesa.altera(id, valores, res)
+     })
+
        
 
     app.post('/categoria', (req,res) => {

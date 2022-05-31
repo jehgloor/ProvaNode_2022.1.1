@@ -9,9 +9,11 @@ class Carteira{
             //funçao de callback vai ser chamada quando a função query acabar de ser executada
             let callback = (erro, resultado) =>{
                 if(erro){
+                    res.status(400).json(erro)
                     console.log(erro)
                 }else{
-                    console.log(resultado)
+                    console.log(resultado);
+                    res.status(200).json(erro);
                 }
             };
             conexao.query(sql,carteira,callback)
@@ -28,6 +30,28 @@ class Carteira{
                     res.status(200).json(resultado)
                 }
                 }) 
+        }
+
+        buscaPorId(id, res){
+            let sql = 'SELECT * FROM carteira WHERE id=?'// ? = 1
+            conexao.query(sql,id,(erro, resultado)=>{
+                if(erro){
+                    res.status(400).json(erro)
+                }else{
+                    res.status(200).json(resultado)
+                }
+            })
+        }
+
+        altera(id, valores, res){
+            let sql = 'UPDATE carteira SET ? WHERE id = ?'
+            conexao.query(sql,[valores, id],(erro, resultado)=>{
+                if(erro){
+                    res.status(400).json(erro)
+                }else{
+                    res.status(200).json(resultado)
+                }
+            })
         }
     }
     module.exports = new Carteira

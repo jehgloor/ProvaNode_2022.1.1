@@ -1,33 +1,37 @@
-const conexao = require ('../database/connection')
-const login = require('../rotas/login')
+const conexao = require('../database/connection')
+const despesa = require('../rotas/despesa')
 
-class Login{
-    adiciona(login,res){
-        let sql = 'INSERT INTO login SET?'
 
-        conexao.query(sql,login,(erro,resultado)=>{
-            if(erro){
-                res.status(400).json
-                // console.log(erro);
+class Despesa{
+    adiciona(despesa){
+        
+        let sql = 'INSERT INTO despesa SET?'
+
+        conexao.query(sql,despesa,(erro,resultado) =>{
+            if (erro){
+                res.status(400).json(erro)
+                console.log(erro);
             }else{
-                res.status(200).json
+                res.status(200).json(erro)
                 console.log(resultado);
             }
         })
     }
+
     lista(res){
-        const sql = 'SELECT * FROM Login'
+        const sql = 'SELECT * FROM despesa'
 
         conexao.query(sql,(erro,resultado)=>{
             if(erro){
-                res.status(400).json(erro)
+                res.status(400).json(erro);
             }else{
                 res.status(200).json(resultado)
             }
         })
     }
+
     buscaPorId(id, res){
-        let sql = 'SELECT * FROM login WHERE id=?'// ? = 1
+        let sql = 'SELECT * FROM despesa WHERE id=?'// ? = 1
         conexao.query(sql,id,(erro, resultado)=>{
             if(erro){
                 res.status(400).json(erro)
@@ -36,8 +40,9 @@ class Login{
             }
         })
     }
+    
     altera(id, valores, res){
-        let sql = 'UPDATE login SET ? WHERE id = ?'
+        let sql = 'UPDATE despesa SET ? WHERE id = ?'
         conexao.query(sql,[valores, id],(erro, resultado)=>{
             if(erro){
                 res.status(400).json(erro)
@@ -47,4 +52,5 @@ class Login{
         })
     }
 }
-module.exports = new Login
+
+module.exports = new Despesa;

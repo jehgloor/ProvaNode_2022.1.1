@@ -67,3 +67,12 @@ conexao.connect(erro =>{
 
         // PARA TESTE DE ERRO
         // curl -d "id_pk=2&descricao=Compramos um Tv 4K&valor=4000.00&data=2022-04-28&tipo=1&carteira_fk=2&categoria_fk=2" http://localhost:3000/lancamento
+
+
+
+        // put objeto inteiro // patch objeto parcial
+
+
+        // teste no reqbin:
+        // "email" : "jose@hotmail.com"
+        // "senha" : "1234"

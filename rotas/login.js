@@ -1,22 +1,34 @@
+
 const Login = require ('../model/login')
 
 module.exports = app => {
     app.get('/login', (req,res) =>{
         res.send('Você está em LOGIN via GET') 
+        //retorna os dados ?
         Login.lista(res)
     } )
         
-    
-    app.post('/login', (req,res) => {
+    app.get('/login /:id',(req, res) => {
+        let id = parseInt(req.params.id)
+        Despesa.buscaPorId(id, res)
+    })
+
+    app.patch('/login/:id',(req, res) =>{
+        let id = parseInt(req.params.id)
+        let valores = req.body
+        Despesa.altera(id, valores, res)
+     })
+
+     app.post('/login', (req,res) => {
         if(req.body.senha>=0){
             console.log('A senha deve conter'+ 
                 'números e letras ou somente letras');
             res.send('A senha deve conter números'+
                 'e letras ou somente letras')
         }else{
-            Login.adiciona(req.body)
-            console.log(req.body)
-            res.send('Você esta em LOGIN via POST')
+            Login.adiciona(req.body,res)
+            // console.log(req.body)
+            // res.send('Você esta em LOGIN via POST')
         }
     })
 }

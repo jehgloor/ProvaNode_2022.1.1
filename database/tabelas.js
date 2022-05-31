@@ -4,24 +4,45 @@ class Tabelas{
         console.log("Banco conectado com sucesso!!!");
         this.conexao=conexao;
 
-        this.criaCarteira()
-        this.criaCategoria()
         this.criaLogin()
-        this.criaLancamento()
+        this.criaCategoria()
+        this.criaCarteira()
+        this.criaDespesa()
        //atribuindo a conexao
         
     }
+    criaLogin(){      //Criacao de tabela Login
+        let sql = 'create table IF NOT EXISTS login'+
+            '(id_login_pk integer not null auto_increment PRIMARY KEY,'+
+            'email varchar(100) UNIQUE not null,'+
+            "senha varchar(15) DEFAULT'senha1234');" 
+           
+
+
+            this.conexao.query(sql, erro => {
+                if(erro){
+                    console.log(erro)
+                }else{
+                    console.log('Tabela LOGIN criada com sucesso!')
+                }
+
+            })
+    }
 
     criaCarteira(){  //Criacao de tabela Carteira
-        let sql = 'CREATE TABLE IF NOT EXISTS despesa '+
-        '(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,'+
-        'valor double NOT NULL,'+
-        'descricao VARCHAR(150) NOT NULL)'
+        let sql = 'CREATE TABLE IF NOT EXISTS carteira '+
+        '(id_carteira_pk INT NOT NULL AUTO_INCREMENT PRIMARY KEY,'+
+        'nome VARCHAR (150) NOT NULL,'+
+        'descricao VARCHAR(150) NOT NULL,'+
+        'saldo double ,'+
+        'limite double,'+
+        'id_login_fk INT,'+
+        'FOREIGN KEY (id_login_fk) REFERENCES login(id_login_pk))'
         this.conexao.query(sql, erro => {
             if(erro){
                 console.log(erro)
             }else{
-                console.log('Tabela despesa criada con sucesso!')
+                console.log('Tabela CARTEIRA criada com sucesso!')
             }
 
         })
@@ -29,47 +50,45 @@ class Tabelas{
 
 
 
-    criaCarteira(){  //Criacao de tabela Carteira
-        let sql = 'create table IF NOT EXISTS carteira'+
-            '(id integer not null auto_increment,'+
-            'descricao varchar(200),'+
-            'saldo double not null,'+
-            'limite double not null,'+
-            'nome varchar(50) not null,'+
-            'primary key(id));'
-            this.conexao.query(sql)
-    }
-
+    
     criaCategoria(){   //Criacao de tabela Categoria
         let sql = 'create table IF NOT EXISTS categoria'+
-            '(id integer not null auto_increment,'+
-            'nome varchar(50) not null,'+
-            'descricao varchar(200),'+
-            'primary key(id));'
-            this.conexao.query(sql)
+            '(id_categoria_pk integer not null auto_increment PRIMARY KEY,'+
+            'nome varchar(150) not null,'+
+            'descricao varchar(200))'
+            
+            this.conexao.query(sql, erro => {
+                if(erro){
+                    console.log(erro)
+                }else{
+                    console.log('Tabela CATEGORIA criada com sucesso!')
+                }
+    
+            })
         }
 
-    criaLogin(){      //Criacao de tabela Login
-        let sql = 'create table IF NOT EXISTS login'+
-            '(id integer not null auto_increment,'+
-            'email varchar(50) not null,'+
-            'senha varchar(15) not null,'+
-            'primary key(id));'
-            this.conexao.query(sql)
-    }
-    criaLancamento(){   
-        let sql = 'create table IF NOT EXISTS lancamento'+
-            '(id integer not null auto_increment,'+
-            'descricao varchar(200),'+
+    
+    criaDespesa(){   
+        let sql = 'create table IF NOT EXISTS despesa'+
+            '(id integer not null auto_increment PRIMARY KEY,'+
             'valor double not null,'+
+            'descricao varchar(200),'+
+            "tipo CHAR NOT NULL DEFAULT 'D',"+
             'data date not null,'+
-            'tipo integer,'+
-            'id_carteira integer not null,'+
-            'id_categoria integer not null,'+
-            'primary key(id),'+
-            'foreign key(id_carteira) references carteira(id),'+
-            'foreign key(id_categoria) references categoria(id));'
-            this.conexao.query(sql)
+            'id_categoria_fk INT ,'+
+            'id_carteira_fk INT ,'+
+            'FOREIGN KEY (id_categoria_fk) REFERENCES CATEGORIA(id_categoria_pk),'+
+            'FOREIGN KEY (id_carteira_fk) REFERENCES CARTEIRA(id_carteira_pk))'
+
+            
+            this.conexao.query(sql, erro => {
+                if(erro){
+                    console.log(erro)
+                }else{
+                    console.log('Tabela DESPESA criada com sucesso!')
+                }
+    
+            })
 
       
     }
