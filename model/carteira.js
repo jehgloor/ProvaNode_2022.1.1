@@ -10,10 +10,10 @@ class Carteira{
             let callback = (erro, resultado) =>{
                 if(erro){
                     res.status(400).json(erro)
-                    console.log(erro)
+                   // console.log(erro)
                 }else{
-                    console.log(resultado);
-                    res.status(200).json(erro);
+                   // console.log(resultado);
+                    res.status(200).json(resultado);
                 }
             };
             conexao.query(sql,carteira,callback)
@@ -33,7 +33,7 @@ class Carteira{
         }
 
         buscaPorId(id, res){
-            let sql = 'SELECT * FROM carteira WHERE id=?'// ? = 1
+            let sql = 'SELECT * FROM carteira WHERE id_categoria_pk=?'// ? = 1
             conexao.query(sql,id,(erro, resultado)=>{
                 if(erro){
                     res.status(400).json(erro)
@@ -44,7 +44,7 @@ class Carteira{
         }
 
         altera(id, valores, res){
-            let sql = 'UPDATE carteira SET ? WHERE id = ?'
+            let sql = 'UPDATE carteira SET ? WHERE id_categoria_pk = ?'
             conexao.query(sql,[valores, id],(erro, resultado)=>{
                 if(erro){
                     res.status(400).json(erro)

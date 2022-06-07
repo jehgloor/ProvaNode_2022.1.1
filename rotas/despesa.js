@@ -6,7 +6,7 @@ module.exports = app => {
     app.get('/despesa', (req,res) =>{
         res.send('Você está em LOGIN via GET') 
         //retorna os dados ?
-        Login.lista(res)
+        Despesa.lista(res)
     } )
         
     app.get('/despesa /:id',(req, res) => {

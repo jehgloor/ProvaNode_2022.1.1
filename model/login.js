@@ -11,12 +11,12 @@ class Login{
                 // console.log(erro);
             }else{
                 res.status(200).json
-                console.log(resultado);
+                //console.log(resultado);
             }
         })
     }
     lista(res){
-        const sql = 'SELECT * FROM Login'
+        const sql = 'SELECT * FROM login'
 
         conexao.query(sql,(erro,resultado)=>{
             if(erro){
@@ -27,7 +27,7 @@ class Login{
         })
     }
     buscaPorId(id, res){
-        let sql = 'SELECT * FROM login WHERE id=?'// ? = 1
+        let sql = 'SELECT * FROM login WHERE id_login_pk=?'// ? = 1
         conexao.query(sql,id,(erro, resultado)=>{
             if(erro){
                 res.status(400).json(erro)
@@ -37,7 +37,7 @@ class Login{
         })
     }
     altera(id, valores, res){
-        let sql = 'UPDATE login SET ? WHERE id = ?'
+        let sql = 'UPDATE login SET ? WHERE id_login_pk = ?'
         conexao.query(sql,[valores, id],(erro, resultado)=>{
             if(erro){
                 res.status(400).json(erro)

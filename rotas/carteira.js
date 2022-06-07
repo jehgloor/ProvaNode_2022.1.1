@@ -4,20 +4,20 @@ const Carteira = require('../model/carteira')
 
 module.exports = app => {
     app.get('/carteira', (req,res) =>{
-        res.send('Você está em LOGIN via GET') 
+        //res.send('Você está em LOGIN via GET') 
         //retorna os dados ?
-        Login.lista(res)
+        Carteira.lista(res)
     } )
         
     app.get('/carteira /:id',(req, res) => {
         let id = parseInt(req.params.id)
-        Despesa.buscaPorId(id, res)
+        Carteira.buscaPorId(id, res)
     })
 
     app.patch('/carteira/:id',(req, res) =>{
         let id = parseInt(req.params.id)
         let valores = req.body
-        Despesa.altera(id, valores, res)
+        Carteira.altera(id, valores, res)
      })
 
         

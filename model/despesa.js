@@ -13,7 +13,7 @@ class Despesa{
                 console.log(erro);
             }else{
                 res.status(200).json(erro)
-                console.log(resultado);
+                //console.log(resultado);
             }
         })
     }
@@ -25,13 +25,13 @@ class Despesa{
             if(erro){
                 res.status(400).json(erro);
             }else{
-                res.status(200).json(resultado)
+                res.status(200).json(resultado);
             }
         })
     }
 
     buscaPorId(id, res){
-        let sql = 'SELECT * FROM despesa WHERE id=?'// ? = 1
+        let sql = 'SELECT * FROM despesa WHERE id_despesa_pk=?'// ? = 1
         conexao.query(sql,id,(erro, resultado)=>{
             if(erro){
                 res.status(400).json(erro)
@@ -42,7 +42,7 @@ class Despesa{
     }
     
     altera(id, valores, res){
-        let sql = 'UPDATE despesa SET ? WHERE id = ?'
+        let sql = 'UPDATE despesa SET ? WHERE id_despesa_pk = ?'
         conexao.query(sql,[valores, id],(erro, resultado)=>{
             if(erro){
                 res.status(400).json(erro)

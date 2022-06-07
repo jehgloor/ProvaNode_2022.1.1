@@ -11,7 +11,7 @@ class Categoria{
                 console.log(erro);
                 res.status(400).json(erro);
             }else{
-                console.log(resultado);
+                //console.log(resultado);
                 res.status(200).json(erro)
             }
         })
@@ -28,7 +28,7 @@ class Categoria{
     }
 
     altera(id, valores, res){
-        let sql = 'UPDATE categoria SET ? WHERE id = ?'
+        let sql = 'UPDATE categoria SET ? WHERE id_categoria_pk = ?'
         conexao.query(sql,[valores, id],(erro, resultado)=>{
             if(erro){
                 res.status(400).json(erro)
@@ -39,7 +39,7 @@ class Categoria{
     }
     
     buscaPorId(id, res){
-        let sql = 'SELECT * FROM categoria WHERE id=?'// ? = 1
+        let sql = 'SELECT * FROM categoria WHERE id_categoria_pk=?'// ? = 1
         conexao.query(sql,id,(erro, resultado)=>{
             if(erro){
                 res.status(400).json(erro)
@@ -48,6 +48,7 @@ class Categoria{
             }
         })
     }
+    
 
    
 }

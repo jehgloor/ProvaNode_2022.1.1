@@ -3,20 +3,20 @@ const Login = require ('../model/login')
 
 module.exports = app => {
     app.get('/login', (req,res) =>{
-        res.send('Você está em LOGIN via GET') 
+        //res.send('Você está em LOGIN via GET') 
         //retorna os dados ?
         Login.lista(res)
     } )
         
     app.get('/login /:id',(req, res) => {
         let id = parseInt(req.params.id)
-        Despesa.buscaPorId(id, res)
+        Login.buscaPorId(id, res)
     })
 
     app.patch('/login/:id',(req, res) =>{
         let id = parseInt(req.params.id)
         let valores = req.body
-        Despesa.altera(id, valores, res)
+        Login.altera(id, valores, res)
      })
 
      app.post('/login', (req,res) => {

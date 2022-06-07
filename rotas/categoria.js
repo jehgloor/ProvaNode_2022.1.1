@@ -2,23 +2,21 @@ const Categoria = require ('../model/categoria')
 
 module.exports = app =>{
     app.get('/categoria', (req,res) =>{
-        res.send('Você está em LOGIN via GET') 
+        //res.send('Você está em LOGIN via GET') 
         //retorna os dados ?
-        Login.lista(res)
+        Categoria.lista(res)
     } )
         
     app.get('/categoria /:id',(req, res) => {
         let id = parseInt(req.params.id)
-        Despesa.buscaPorId(id, res)
+        Categoria.buscaPorId(id, res)
     })
 
     app.patch('/categoria/:id',(req, res) =>{
         let id = parseInt(req.params.id)
         let valores = req.body
-        Despesa.altera(id, valores, res)
+        Categoria.altera(id, valores, res)
      })
-
-       
 
     app.post('/categoria', (req,res) => {
         if(req.body.id_pk>15){
@@ -30,4 +28,6 @@ module.exports = app =>{
             res.send('Você esta em CATEGORIA via POST')
         }
     })
+
+    
 }
